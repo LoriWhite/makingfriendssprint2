@@ -1,13 +1,11 @@
-package user.details;
+package user.details.mock;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
-public class dbconnect {
-	
-	Connection con = null;
+public class mockdbconnect {
+Connection con = null;
 	
 	public Connection connect()
 	{
@@ -30,4 +28,5 @@ public class dbconnect {
 		}
 		return con;
 	}
+
 }

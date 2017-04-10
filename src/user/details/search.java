@@ -1,15 +1,17 @@
 package user.details;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.sql.Connection;
-import java.util.Date;
+import java.util.ArrayList;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
-import java.text.SimpleDateFormat;
 
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +26,7 @@ import javax.servlet.http.HttpSession;
 public class search extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String uname;
+	ArrayList<String> list = new ArrayList<String>();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -49,8 +52,9 @@ public class search extends HttpServlet {
 		doGet(request, response);
 		HttpSession session = request.getSession();
 		uname = (String) session.getAttribute("uname");
-		PrintWriter out = response.getWriter();
+	
 		response.setContentType("text/html");
+		ArrayList<String> listp = new ArrayList<String>();
 		try
 		{
 			dbconnect db = new dbconnect();
@@ -65,22 +69,34 @@ public class search extends HttpServlet {
             	date2 =rs.getString(1);
             	from1 = rs.getTime(2);
             	to1 = rs.getTime(3);
-               // Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(date2);
             }
+            
             System.out.println(date2 + from1 + to1);
-            Statement st1 = con.createStatement();
-            String q2 = "select username from freetime where date1 = '"+date2+"' and ((from1 >= '"+from1+"' and to1 <= '"+to1+"') or (from1 > '"+from1+"' and from1 < '"+to1+"' and to1 > '"+to1+"') or (from1 < '"+from1+"' and to1 > '"+from1+"'))";
-            ResultSet rs1 = st1.executeQuery(q2);
-            while(rs1.next())
+            st.close();
+            searchuserclass suc=new searchuserclass();
+            listp= suc.searchuser(uname,date2,from1,to1);
+            if(listp.isEmpty())
             {
-            	//rs1.getString(1);
-            	System.out.println(rs1.getString(1));
+            	
+                session.setAttribute("uname", uname);
+        		RequestDispatcher dispatcher = request.getRequestDispatcher("/nosearch.jsp");
+        	    dispatcher.forward(request, response);
             }
+            else
+            {
+            session.setAttribute("list1", listp);
+            session.setAttribute("uname", uname);
+    		RequestDispatcher dispatcher = request.getRequestDispatcher("/search.jsp");
+    	    dispatcher.forward(request, response);
+            }
+    	    
+  	        con.close();
+  	        
 		}
 		catch(SQLException e)
         {
             System.out.println(e.getMessage());    
         }
 	}
-
+	
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,20 +11,37 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>MEET</title>
-</head>
+<title>SETTIME</title>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $(function () {
+            	$("#datepicker").datepicker({
+            		  minDate: 0,
+            		 dateFormat: 'yy-mm-dd'
+            		});
+
+            });
+        </script>
 <style>
 table.ex1 {
     border-collapse: separate;
-    border-spacing: 60px;
+    border-spacing: 10px;
+    margin: 0 auto;
+}
+td{
+	background-color:black;
 }
 body {
       font: 20px Montserrat, sans-serif;
       line-height: 1.8;
-      color: #f5f6f7;
+     
   }
+  p {font-size: 16px;}
   .margin {margin-bottom: 45px;}
-   .container-fluid {
+  
+  .container-fluid {
       padding-top: 70px;
       padding-bottom: 70px;
   }
@@ -41,11 +58,8 @@ body {
       color: #1abc9c !important;
   }
 </style>
-<c:if test="${not empty available}">
-    <script>
-    alert("Available time has been set");
-</script>
-</c:if>
+
+</head>
 <body>
 <div class="container">
 <div class="navbar-header">
@@ -55,26 +69,32 @@ body {
         <span class="icon-bar"></span>                        
       </button>
       <a class="navbar-brand" align="left" href="#">MakingFriends.com</a>
-    </div>
- <div class="container-fluid bg-1 text-center">
- <img src="https://media.tenor.co/images/b3f33ac02643a0a89f55e22a6d03e9b6/tenor.gif" class="img-responsive img-circle margin" style="display:inline" alt="people" width="400" height="300">   
-<input type="hidden" name="uname" value='${uname}'/>
-<table align ="Center" style="margin-top:0px" class = "ex1">
+    </div>    	
+  </div>
+
+
+<div class="container-fluid bg-1 text-center">
+<form action="timeinsert" method="post">
+<table class = "ex1">
 <tr>
-<form action="settime" method="post">
-<td><input type ="submit" name="Set Availability" button class ="btn btn-info" value ="Set Availability"/></td>
-</form>
-<form action="search" method="post">
-<td><input type ="submit" name="Search" button class ="btn btn-info" value ="Search"/></td>
-</form>
+<th>DATE</th>
+	<td><input type ="text" name = "date1" placeholder="yyyy-mm-dd" id = "datepicker"/></td>
+</tr>
+
+<tr>
+<th>From</th>
+	<td><input type ="text" name ="from" placeholder="HH:MM"/></td>
+	
+<th>To</th>
+	<td><input type ="text" name = "to" placeholder="HH:MM"/></td>
 </tr>
 <tr>
-<form action="home" method="post">
-<td align ="center"><input type ="submit" name="HOME" button class ="btn btn-info" value ="HOME"/></td>
-</form>
+<td align="center"><input type ="submit" value ="SUBMIT"/></td>
+</tr>
+<tr>
+<td><input type="hidden" name="uname" value='${uname}'/></td>
 </tr>
 </table>
-</div>
-</div>
+<img src="https://68.media.tumblr.com/ae7ca1e08107060274e0ec1e868b6142/tumblr_o7f437VYMQ1vqb4g5o1_500.gif" class="img-responsive img-circle margin" style="display:inline" alt="time" width="350" height="350">
 </body>
 </html>

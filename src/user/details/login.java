@@ -82,7 +82,7 @@ public class login extends HttpServlet {
             		if(tpassword.equals(password))
             		{
             			out.println("login successful");
-                		request.setAttribute("uname", username);
+                		session.setAttribute("uname", username);
                 		RequestDispatcher dispatcher = request.getRequestDispatcher("/home");
                 	      dispatcher.forward(request, response);
             		}

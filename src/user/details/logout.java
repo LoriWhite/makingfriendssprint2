@@ -11,17 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class meet
+ * Servlet implementation class logout
  */
-@WebServlet("/meet")
-public class meet extends HttpServlet {
+@WebServlet("/logout")
+public class logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	String uname;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public meet() {
+    public logout() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,11 +40,10 @@ public class meet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 		HttpSession session = request.getSession();
-		uname = (String) session.getAttribute("uname");
-		session.setAttribute("uname", uname);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/meet.jsp");
-	    dispatcher.forward(request, response);
-	    
+		response.setContentType("text/html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/index1.jsp");
+	      dispatcher.forward(request, response);
+	      session.invalidate();  
 	}
 
 }

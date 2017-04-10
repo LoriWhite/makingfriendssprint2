@@ -9,7 +9,7 @@ import user.details.validate;
 
 public class validateUsername {
 
-	@Before
+
 
 	@Test
 	public void testValidateUsername() 

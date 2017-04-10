@@ -1,4 +1,4 @@
-package user.details;
+package user.details.mock;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
-public class match {
-	HashMap<String, Integer> hmap=new HashMap<String, Integer>();
+public class mockmatch {
+HashMap<String, Integer> hmap=new HashMap<String, Integer>();
 	
 	public HashMap<String, Integer> getUser(String uname)
 	{
 		System.out.println("here");
 		System.out.println(uname);
-		
+	
 		int count;
 		String value = null;
 		ArrayList<String> list1 = new ArrayList<String>();
@@ -24,7 +24,7 @@ public class match {
 		ArrayList<String> list2 = new ArrayList<String>();
 		try
 		{
-			dbconnect db = new dbconnect();
+			mockdbconnect db = new mockdbconnect();
 			Connection con = db.connect();
 			Statement st3 = con.createStatement();  
 	        String q4 = "select concat_ws(\",\", (case when sports = 1 then 'sports' end),\n" +
@@ -39,7 +39,7 @@ public class match {
               " (case when tvmovies = 1 then 'tvmovies' end),"+
               " (case when youtubemedia = 1 then 'youtubemedia' end),"+
               " (case when arts = 1 then 'arts' end)"+
-             ") from interest where username='"+uname+"' ";
+             ") from interestmock where username='"+uname+"' ";
 	        ResultSet rs3 = st3.executeQuery(q4);
             while(rs3.next())
             {
@@ -56,14 +56,14 @@ public class match {
             }
             st3.close();
            Statement st = con.createStatement();
-            String q1 = "select count(username)from userdata where username != '"+uname+"'";
+            String q1 = "select count(username)from userdatamock where username != '"+uname+"'";
             ResultSet rs = st.executeQuery(q1);
             while(rs.next())
             {
             	count = rs.getInt(1);
             	System.out.println(count);
             	Statement st1 = con.createStatement();
-                String q2 = "select username from userdata where username != '"+uname+"'";
+                String q2 = "select username from userdatamock where username != '"+uname+"'";
                 ResultSet rs1 = st1.executeQuery(q2);
                 while(rs1.next())
                 {
@@ -82,7 +82,7 @@ public class match {
                           " (case when tvmovies = 1 then 'tvmovies' end),"+
                           " (case when youtubemedia = 1 then 'youtubemedia' end),"+
                           " (case when arts = 1 then 'arts' end)"+
-                         ") from interest where username='"+pname+"' ";
+                         ") from interestmock where username='"+pname+"' ";
          	         ResultSet rs2 = st2.executeQuery(q3);
          	         while(rs2.next())
          	         {

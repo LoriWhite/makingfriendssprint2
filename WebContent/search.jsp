@@ -11,28 +11,54 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>MESSAGE</title>
+<title>Search</title>
 </head>
+<style type="text/css">
+th
+{
+    padding:0 15px 0 15px;
+}
+td
+{
+    padding:0 15px 0 15px;
+}
+</style>
 <style>
 .btn {
-    margin: 10px auto;
+    margin: 15px auto;
+}
+body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+     
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+ 
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }
+table{
+	margin: 0 auto;
 }
 table.ex1 {
     border-collapse: separate;
     border-spacing: 10px;
 }
 </style>
-<c:if test="${not empty valid}">
-    <script>
-    alert("Message cannot be empty !!");
-</script>
-</c:if>
-<c:if test="${not empty validsender}">
-    <script>
-    alert("Enter valid recipient !!");
-</script>
-</c:if>
-
 <body>
 <div class="container">
 <div class="navbar-header">
@@ -42,27 +68,22 @@ table.ex1 {
         <span class="icon-bar"></span>                        
       </button>
       <a class="navbar-brand" align="left" href="#">MakingFriends.com</a>
-    </div>    	
-  </div>
-<form action="send" method="post">
-<table class = "ex1">
-<tr>
-<th>Recipient</th>
-	<td><input type = "text" name = "recipient"/></td>
-</tr>
-<tr>
-<th>Message</th>
-	<td><input type ="text" name ="message"/></td>
-</tr>
-<tr>
-<div class="col-md-4 text-center">
-<td><input type ="submit" name="SEND" button class ="btn btn-info" value ="SEND"/></td>
-</div>
-</tr>
-<tr>
-<td><input type="hidden" name="uname" value='${uname}'/></td>
-</tr>
+    </div>
+<div class="container-fluid bg-1 text-center">
+<input type="hidden" name="uname" value='${uname}'/>
+ <table border ="5">
+   <tr>
+   <th>Users Available</th>
+   </tr>
+   <c:forEach var="list" items="${list1}" >
+   <tr>
+    <td>${list}</td>
+    </tr>
+	</c:forEach>
 </table>
+<form action="home" method="post">
+<input type ="submit" name="HOME" button class ="btn btn-info" value ="HOME"/>
 </form>
+</div>
 </body>
 </html>

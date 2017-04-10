@@ -11,12 +11,17 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>LOGIN</title>
+<title align ="center">LOGIN</title>
 </head>
 <c:if test="${not empty loginError}">
     <script>alert("Incorrect Username or Password.Try Again!");
 </script>
 </c:if>
+<style>
+.btn {
+    margin: 10px auto;
+}
+</style>
 <body>
 <div class="container">
 <div class="navbar-header">
@@ -42,7 +47,9 @@
 	<td><input type = "password" name = "password"/></td>
 </tr>
 </table>
+<div class="col-md-4 text-center">
 <input type ="submit" class ="btn btn-info" value ="LOGIN"/>
+</div>
 </form>
 </div>
 </body>

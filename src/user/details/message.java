@@ -2,9 +2,6 @@ package user.details;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,7 +33,7 @@ public class message extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -47,12 +44,10 @@ public class message extends HttpServlet {
 		doGet(request, response);
 		HttpSession session = request.getSession();
 		uname = (String) session.getAttribute("uname");
-		
+		session.setAttribute("uname", uname);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/message.jsp");
 	     dispatcher.forward(request, response);
-	     session.setAttribute("uname", uname);
-	     //session.setAttribute("map",map);
-	     //System.out.println(map);
+	   
 	}
 
 }

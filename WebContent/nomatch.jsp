@@ -13,6 +13,32 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>NOMATCH</title>
 </head>
+<style>
+body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+      
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+ 
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }
+</style>
 <body>
 <div class="container">
 <div class="navbar-header">
@@ -24,8 +50,13 @@
       <a class="navbar-brand" align="left" href="#">MakingFriends.com</a>
     </div>
 </div>
+<div class="container-fluid bg-1 text-center">
 <h3>Hello,${uname}</h3>
 <h5> No users matched with your interests</h5>
-<a href="home.jsp"><input type ="button" button class ="btn btn-info" value ="BACK"/></a>
+
+<form action="home" method="post">
+<td><input type ="submit" name="BACK" button class ="btn btn-info" value ="BACK"/></td>
+</form>
+</div>
 </body>
 </html>

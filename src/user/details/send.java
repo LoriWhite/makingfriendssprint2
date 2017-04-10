@@ -2,15 +2,15 @@ package user.details;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.time.LocalDateTime;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -53,59 +53,52 @@ public class send extends HttpServlet {
 		doGet(request, response);
 		HttpSession session = request.getSession();
 		uname = (String) session.getAttribute("uname");
-		PrintWriter out = response.getWriter();
+		
 		response.setContentType("text/html");
 		String recipient = request.getParameter("recipient").toString();
 		String message = request.getParameter("message").toString();
 		System.out.println(recipient + message);
-		if(recipientTest(recipient)==true)
+		if(recipientTest(recipient,uname)==true)
 		{
 			System.out.println("yesss");
 			if(checkMessage(message)==true)
 			{
 				System.out.println("second yess");
-				try
-				{
-					dbconnect db = new dbconnect();
-					Connection con = db.connect();
-			        Statement st = con.createStatement();
-			       LocalDateTime now = LocalDateTime.now();
-			        System.out.println(now);
-			       String q1 = "insert into messages values('"+uname+"','"+recipient+"','"+message+"','"+now+"')";
-			        st.executeUpdate(q1);
-		            System.out.println("inserted messages");
-            		session.setAttribute("uname", uname);
-            		RequestDispatcher dispatcher = request.getRequestDispatcher("/home");
-            	    dispatcher.forward(request, response);
-            	    st.close();
-			        con.close();
-				}
-				catch(SQLException e)
-				{
-					System.out.println(e.getMessage());
-				}
+				LocalDateTime now = LocalDateTime.now();
+		        System.out.println(now);
+		        boolean send1;
+		        sendmessage sm= new sendmessage();
+				send1=sm.insertintomessage(uname,recipient,message,now);
+				session.setAttribute("uname", uname);
+            	RequestDispatcher dispatcher = request.getRequestDispatcher("/messagesuccess.jsp");
+            	dispatcher.forward(request, response);
+			
 			}
 			else
 			{
-	           /*	RequestDispatcher dispatcher = request.getRequestDispatcher("/message.jsp");
-		        request.setAttribute("sendError","No Message is Written");
-	        	dispatcher.forward(request, response);*/
+				String pq = "message is empty";
+        		request.setAttribute("valid",pq);
+        		session.setAttribute("uname",uname);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/message.jsp");
+		      	dispatcher.forward(request, response);
 			}
 		}
 		else
 		{
-			/*RequestDispatcher dispatcher = request.getRequestDispatcher("/message.jsp");
-	        request.setAttribute("sendError","Incorrect Recipient");
-        	dispatcher.forward(request, response);*/
+			String pq = "Enter valid recipient";
+    		request.setAttribute("validsender",pq);
+    		session.setAttribute("uname",uname);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/message.jsp");
+        	dispatcher.forward(request, response);
 		}
 		
 	}
-	public boolean recipientTest(String recipientName)
+	public boolean recipientTest(String recipientName,String username)
 	{
 		boolean check = false;
 		
-		matchuser m = new matchuser();
-		HashMap<String, Integer> map = m.getUser(uname);
+		match m = new match();
+		HashMap<String, Integer> map = m.getUser(username);
 		Set s = map.entrySet();
 		Iterator i = s.iterator();
 		while(i.hasNext())
@@ -120,10 +113,16 @@ public class send extends HttpServlet {
 	
 	public boolean checkMessage(String messageText)
 	{
-		boolean check = true;
-		if(messageText.equals("") || messageText.matches("[^\\s]+"))
-			check = false;
+		Pattern regex2 = Pattern.compile("[a-zA-Z]");
+		Matcher matcher2 = regex2.matcher(messageText);
+		boolean check = false;
+		if(messageText != null)
+		{
+			if(matcher2.find())
+				check = true;
+		}
+			
 		return check;
 	}
-
+	
 }

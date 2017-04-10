@@ -1,15 +1,14 @@
 package user.details;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,7 +41,7 @@ public class notification extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -53,10 +52,34 @@ public class notification extends HttpServlet {
 		doGet(request, response);
 		HttpSession session = request.getSession();
 		uname = (String) session.getAttribute("uname");
-		PrintWriter out = response.getWriter();
+
 		response.setContentType("text/html");
 		ArrayList<receivedMessage>text;
 		text = new ArrayList<receivedMessage>();
+		
+			text=getnotification(uname);
+            if(text.isEmpty())
+    		{
+    			
+        		session.setAttribute("uname",uname);
+    	      	RequestDispatcher dispatcher = request.getRequestDispatcher("/nonotifications.jsp");
+    		    dispatcher.forward(request, response);
+    		}
+    		else
+    		{
+    			System.out.println("messages recieved");
+    			session.setAttribute("messages",text);
+    	      	session.setAttribute("uname",uname);
+    	      	RequestDispatcher dispatcher = request.getRequestDispatcher("/notifications.jsp");
+    		    dispatcher.forward(request, response);
+    		}
+           
+		
+	}
+	public ArrayList<receivedMessage> getnotification(String uname)
+	{
+		ArrayList<receivedMessage>text1;
+		text1 = new ArrayList<receivedMessage>();
 		try
 		{
 			dbconnect db = new dbconnect();
@@ -71,32 +94,15 @@ public class notification extends HttpServlet {
             	sender =rs.getString(1);
             	message = rs.getString(2);
             	datetime = rs.getTimestamp(3);
-            	text.add(new receivedMessage(sender,message,datetime));
+            	text1.add(new receivedMessage(sender,message,datetime));
              }
             System.out.println(sender + message + datetime);
-            if(text.isEmpty())
-    		{
-    			
-    			String pq = "No notifications";
-        		request.setAttribute("notifications",pq);
-        		request.setAttribute("uname",uname);
-    	      	RequestDispatcher dispatcher = request.getRequestDispatcher("/home");
-    		    dispatcher.forward(request, response);
-    		}
-    		else
-    		{
-    			System.out.println("messages recieved");
-    			session.setAttribute("messages",text);
-    	      	session.setAttribute("uname",uname);
-    	      	RequestDispatcher dispatcher = request.getRequestDispatcher("/notifications.jsp");
-    		    dispatcher.forward(request, response);
-    		}
-           
 		}
 		catch(SQLException e)
         {
             System.out.println(e.getMessage());    
         }
+		return text1;
 	}
 
 }

@@ -24,11 +24,60 @@
 
             });
         </script>
+        <c:if test="${not empty mintime}">
+    <script>
+    alert("Atleast 30 minutes should be available");
+</script>
+</c:if>
+
+<c:if test="${not empty totime}">
+    <script>
+    alert("Set valid to time");
+</script>
+</c:if>
+<c:if test="${not empty fromtime}">
+    <script>
+    alert("Set valid From time");
+</script>
+</c:if>
+<c:if test="${not empty datetime}">
+    <script>
+    alert("Select Valid Date");
+</script>
+</c:if>
       <style>
 table.ex1 {
     border-collapse: separate;
     border-spacing: 10px;
+    margin: 0 auto;
 }
+td{
+	background-color:black;
+}
+body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+     
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+  
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }
 </style>
 
 </head>
@@ -43,6 +92,8 @@ table.ex1 {
       <a class="navbar-brand" align="left" href="#">MakingFriends.com</a>
     </div>    	
   </div>
+  
+<div class="container-fluid bg-1 text-center">
 <form action="timeinsert" method="post">
 <table class = "ex1">
 <tr>
@@ -51,11 +102,11 @@ table.ex1 {
 </tr>
 
 <tr>
-<th>From</th>
-	<td><input type ="text" name ="from" placeholder="HH:MM"/></td>
+<th>FROM</th>
+	<td><input type ="text" name ="from" placeholder="00:00"/></td>
 	
-<th>To</th>
-	<td><input type ="text" name = "to" placeholder="HH:MM"/></td>
+<th>TO</th>
+	<td><input type ="text" name = "to" placeholder="23:59"/></td>
 </tr>
 <tr>
 <td align="center"><input type ="submit" value ="SUBMIT"/></td>
@@ -64,5 +115,8 @@ table.ex1 {
 <td><input type="hidden" name="uname" value='${uname}'/></td>
 </tr>
 </table>
+</form>
+<img src="https://68.media.tumblr.com/ae7ca1e08107060274e0ec1e868b6142/tumblr_o7f437VYMQ1vqb4g5o1_500.gif" class="img-responsive img-circle margin" style="display:inline" alt="time" width="350" height="350">
+</div>
 </body>
 </html>

@@ -13,8 +13,45 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>MATCH</title>
 </head>
+<style>
+.btn {
+    margin: 15px auto;
+}
+body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+     
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+ 
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }
+table{
+	margin: 0 auto;
+}
+table.ex1 {
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+</style>
 <body>
 <div class="container">
+<div class = "page-header">
 <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
@@ -23,10 +60,13 @@
       </button>
       <a class="navbar-brand" align="left" href="#">MakingFriends.com</a>
     </div>
-</div>
-<h3>Hello,${uname}</h3>
-   <table border ="5">
-   <tr>
+    </div>
+<div class="container-fluid bg-1 text-center">
+<input type="hidden" name="uname" value='${uname}'/>
+	
+	<h3>Hello,</h3>
+   <table border ="5" >
+    <tr>
    <th>Username</th>
    <th>Count of Matching Interests</th>
    </tr>
@@ -37,8 +77,17 @@
     </tr>
 </c:forEach>
 </table>
+<table class= "ex1">
+<tr>
 <form action="message" method="post">
-<input type ="submit" name="SendMessage" button class ="btn btn-info" value ="SENDMESSAGE"/>
+<td><input type ="submit" name="SendMessage" button class ="btn btn-info" value ="SENDMESSAGE"/></td>
 </form>
+<form action="home" method="post">
+<td><input type ="submit" name="HOME" button class ="btn btn-info" value ="HOME"/></td>
+</form>
+</tr>
+</table>
+</div>
+</div>
 </body>
 </html>

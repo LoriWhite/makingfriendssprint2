@@ -23,6 +23,42 @@ td
     padding:0 15px 0 15px;
 }
 </style>
+<style>
+.btn {
+    margin: 15px auto;
+}
+body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+     
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+ 
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }
+table{
+	margin: 0 auto;
+}
+table.ex1 {
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+</style>
 <body>
 <div class="container">
 <div class="navbar-header">
@@ -33,8 +69,9 @@ td
       </button>
       <a class="navbar-brand" align="left" href="#">MakingFriends.com</a>
     </div>
-</div>
- <table border ="5" align="Center">
+<div class="container-fluid bg-1 text-center">
+<input type="hidden" name="uname" value='${uname}'/>
+ <table border ="5">
    <tr>
    <th>Sender</th>
    <th>Message</th>
@@ -46,7 +83,11 @@ td
     <td>${receivedMessage.message}</td>
     <td>${receivedMessage.time}</td>
     </tr>
-</c:forEach>
+	</c:forEach>
 </table>
+<form action="home" method="post">
+<input type ="submit" name="HOME" button class ="btn btn-info" value ="HOME"/>
+</form>
+</div>
 </body>
 </html>

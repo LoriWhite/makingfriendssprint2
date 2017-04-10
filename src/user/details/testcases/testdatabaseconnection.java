@@ -2,10 +2,10 @@ package user.details.testcases;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
+
 import org.junit.Test;
 
-import user.details.dbconnect;
+import user.details.mock.mockdbconnect;
 
 public class testdatabaseconnection {
 
@@ -13,7 +13,7 @@ public class testdatabaseconnection {
 	@Test
 	public void databaseConnectionTest()
 	{
-		dbconnect h1 = new dbconnect();
+		mockdbconnect h1 = new mockdbconnect();
 		assertNotNull(h1.connect());
 		
 	}

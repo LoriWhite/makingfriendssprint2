@@ -17,44 +17,52 @@
     margin-right: 5px;
 }
 </style>
+<style>
+table.ex1 {
+    border-collapse: separate;
+    border-spacing: 20px;
+}
+</style>
 </head>
 <c:if test="${not empty updatedmessage}">
     <script>
     alert("Profile saved");
 </script>
 </c:if>
-<c:if test="${not empty available}">
-    <script>
-    alert("Available time has been set");
-</script>
-</c:if>
-<c:if test="${not empty notifications}">
-    <script>
-    alert("No messages to display !!");
-</script>
-</c:if>
+
 <body>
 <div class = "container">
 <div class = "page-header">
 <h1>Welcome !</h1>
     <div class="btn-toolbar pull-right">
+    	<table align ="right" style="margin-top:10px" class = "ex1">
+    	<tr>
         <form action="profile" method="get">
-		<input type ="submit" name="PROFILE" button class ="btn btn-info" value ="PROFILE"/>
+		<td><input type ="submit" name="PROFILE" button class ="btn btn-info" value ="PROFILE"/></td>
 		</form>
-        <a href="login.jsp"><input type ="button" button class ="btn btn-info" value ="LOGOUT"/></a>
+		<form action="logout" method="post">
+		<td><input type ="submit" name="LOGOUT" button class ="btn btn-info" value ="LOGOUT"/></td>
+		</form>
+         </tr>
+        </table>
     </div>
  </div>
- <h3 align ="left" >Hello,</h3>
-<h3>${uname}</h3>
-<form action="matchuser" method="post">
-<input type ="submit" name="MATCH" button class ="btn btn-info" value ="MATCH"/>
+
+ <h3 align ="left">Hello, </h3>
+ <h3>${uname}</h3>
+ <table align ="Center" style="margin-top:50px" class = "ex1">
+ <tr>
+ <form action="matchuser" method="post">
+<td align="left"><input type ="submit" name="MATCH" button class ="btn btn-info" value ="MATCH"/></td>
 </form>
 <form action="meet" method="post">
-<input type ="submit" name="MEET" button class ="btn btn-info" value ="MEET"/>
+<td align="center"><input type ="submit" name="MEET" button class ="btn btn-info" value ="MEET"/></td>
 </form>
 <form action="notification" method="post">
-<input type ="submit" name="NOTIFICATIONS" button class ="btn btn-info" value ="NOTIFICATIONS"/>
+<td align="right"><input type ="submit" name="NOTIFICATIONS" button class ="btn btn-info" value ="NOTIFICATIONS"/></td>
 </form>
-</div>
+</tr>
+</table>
+ </div>
 </body>
 </html>
